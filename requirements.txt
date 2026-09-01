@@ -1,0 +1,14 @@
+# Runtime dependencies.  Pinned to the versions this was developed and measured
+# against; nothing here reaches the network at run time.
+#
+# Deliberately absent: any LLM or hosted-API client, and any learned table detector.
+# See docs/DECISIONS.md D1 for why the pipeline is pure-classical.
+pymupdf==1.28.2          # PDF parsing, vector geometry, rasterising, overlay rendering
+numpy==2.3.2             # projection profiles, Otsu, skew search
+pillow==11.3.0           # deskew resampling, denoise, cell crops for OCR
+openpyxl==3.1.5          # one .xlsx per logical table
+psutil==7.0.0            # measured peak RSS for the resource report
+
+# Optional: enables the per-cell OCR path.  Without it, raster cells are written as
+# NULL with an OCR_UNAVAILABLE issue rather than guessed (see docs/LIMITATIONS.md L1).
+pytesseract==0.3.13

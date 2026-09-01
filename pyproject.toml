@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridsmith"
+version = "0.1.0"
+description = "Deterministic table and context extraction from large, messy PDFs"
+requires-python = ">=3.10"
+dependencies = [
+    "pymupdf>=1.24",
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "openpyxl>=3.1",
+    "psutil>=5.9",
+]
+
+[project.optional-dependencies]
+ocr = ["pytesseract>=0.3.10"]
+dev = ["pytest>=8.0", "pdfplumber>=0.11"]
+
+[project.scripts]
+gridsmith = "gridsmith.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gridsmith = ["schema.sql", "calibration.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
