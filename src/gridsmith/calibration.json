@@ -1,0 +1,99 @@
+{
+  "diagnostics": {
+    "base_rate": 0.7908,
+    "bins": [
+      {
+        "empirical": 0.1034,
+        "fitted": 0.1679,
+        "n": 116,
+        "n_correct": 12,
+        "upper_edge": 0.8027
+      },
+      {
+        "empirical": 0.4828,
+        "fitted": 0.5356,
+        "n": 58,
+        "n_correct": 28,
+        "upper_edge": 0.8303
+      },
+      {
+        "empirical": 0.931,
+        "fitted": 0.922,
+        "n": 174,
+        "n_correct": 162,
+        "upper_edge": 0.8954
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9641,
+        "n": 58,
+        "n_correct": 58,
+        "upper_edge": 0.8954
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9641,
+        "n": 58,
+        "n_correct": 58,
+        "upper_edge": 0.8954
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9641,
+        "n": 58,
+        "n_correct": 58,
+        "upper_edge": 0.8975
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9641,
+        "n": 58,
+        "n_correct": 58,
+        "upper_edge": 0.8975
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9641,
+        "n": 58,
+        "n_correct": 58,
+        "upper_edge": 0.8975
+      },
+      {
+        "empirical": 1.0,
+        "fitted": 0.9651,
+        "n": 60,
+        "n_correct": 60,
+        "upper_edge": 0.903
+      }
+    ],
+    "n_correct": 552,
+    "n_points": 698,
+    "n_pooled_bins": 9,
+    "n_raw_bins": 12
+  },
+  "edges": [
+    0.8027,
+    0.8303,
+    0.8954,
+    0.8954,
+    0.8954,
+    0.8975,
+    0.8975,
+    0.8975,
+    0.903
+  ],
+  "fitted_on": "3 sample documents + 8 generated fixtures, default configuration and three ablations (metrics/run_all.py)",
+  "method": "equal-count binning -> pool-adjacent-violators -> shrink to base rate (weight n/(n+12)) -> cap at 0.99",
+  "source": "metrics/fit_calibration.py (isotonic PAV over 698 labelled cells)",
+  "values": [
+    0.1679,
+    0.5356,
+    0.922,
+    0.9641,
+    0.9641,
+    0.9641,
+    0.9641,
+    0.9641,
+    0.9651
+  ]
+}
