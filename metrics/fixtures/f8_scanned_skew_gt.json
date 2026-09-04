@@ -1,0 +1,16 @@
+{
+  "document": "f8_scanned_skew.pdf",
+  "generated_by": "metrics/fixtures/make_fixtures.py",
+  "why": "Image-only page, skewed by -1.6 degrees, built by rendering f1_indent_hierarchy.pdf. Page typing must say 'scanned', skew estimation must recover about 1.6 degrees, and with no OCR engine present every cell must be flagged OCR_UNAVAILABLE with null text -- never guessed.",
+  "expect_page_type": "scanned",
+  "expect_skew_deg_abs_between": [
+    1.0,
+    2.4
+  ],
+  "expect_no_silent_cells": true,
+  "expect_all_cells_flagged_when_no_ocr": true,
+  "expect_logical_tables": 1,
+  "expect_min_cells": 12,
+  "source_fixture": "f1_indent_hierarchy.pdf",
+  "note": "Structure must be recovered from the rule lattice even with no text layer -- morphology finds the grid, and every cell is then created empty for OCR. With no OCR engine each one must carry OCR_UNAVAILABLE, raw_text NULL and confidence 0."
+}

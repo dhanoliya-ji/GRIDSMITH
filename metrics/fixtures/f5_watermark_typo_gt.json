@@ -1,0 +1,112 @@
+{
+  "document": "f5_watermark_typo.pdf",
+  "generated_by": "metrics/fixtures/make_fixtures.py",
+  "why": "A pale 84 pt DRAFT watermark rotated 45 degrees across the table, and a subtotal that deliberately does not reconcile: 1,184 + 2,421 = 3,605 and the document states 3,505. The value must be extracted as 3505 and FLAGGED, never corrected. The FY24 column reconciles exactly (842 + 1,963 = 2,805), so the check must fail on one column only.",
+  "pages_exhaustively_labelled": [
+    1
+  ],
+  "detection": [
+    {
+      "page": 1,
+      "kind": "table",
+      "id": "f5",
+      "bbox": [
+        60.0,
+        110.0,
+        520.0,
+        198.0
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": "f5",
+      "page": 1,
+      "bbox": [
+        60.0,
+        110.0,
+        520.0,
+        198.0
+      ],
+      "n_rows": 4,
+      "n_cols": 3,
+      "n_header_rows": 1,
+      "unit": "INR crore",
+      "cells": [
+        [
+          "Particulars",
+          "FY25",
+          "FY24"
+        ],
+        [
+          "Micro and small enterprises",
+          "1,184",
+          "842"
+        ],
+        [
+          "Other creditors",
+          "2,421",
+          "1,963"
+        ],
+        [
+          "Total trade payables",
+          "3,505",
+          "2,805"
+        ]
+      ],
+      "normalized": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          1184.0,
+          842.0
+        ],
+        [
+          null,
+          2421.0,
+          1963.0
+        ],
+        [
+          null,
+          3505.0,
+          2805.0
+        ]
+      ],
+      "reconciliation_expected": [
+        {
+          "kind": "down_foot",
+          "row": 3,
+          "col": 1,
+          "status": "fail",
+          "note": "1,184 + 2,421 = 3,605 but the document states 3,505"
+        },
+        {
+          "kind": "down_foot",
+          "row": 3,
+          "col": 2,
+          "status": "pass",
+          "note": "842 + 1,963 = 2,805, correct"
+        }
+      ],
+      "must_flag_cells": [
+        {
+          "row": 3,
+          "col": 1,
+          "expected_codes": [
+            "DOWNFOOT_FAIL"
+          ]
+        }
+      ],
+      "must_not_change": {
+        "row": 3,
+        "col": 1,
+        "normalized_value": 3505.0
+      }
+    }
+  ],
+  "negatives": []
+}

@@ -1,0 +1,219 @@
+{
+  "document": "f1_indent_hierarchy.pdf",
+  "generated_by": "metrics/fixtures/make_fixtures.py",
+  "why": "Two-level header with spanning cells; three-level indentation-only row hierarchy; Indian digit grouping; parenthesised negatives; scale declared above the table, not in the caption.",
+  "pages_exhaustively_labelled": [
+    1
+  ],
+  "detection": [
+    {
+      "page": 1,
+      "kind": "table",
+      "id": "f1",
+      "bbox": [
+        60.0,
+        130.0,
+        520.0,
+        320.0
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": "f1",
+      "page": 1,
+      "bbox": [
+        60.0,
+        130.0,
+        520.0,
+        320.0
+      ],
+      "n_rows": 9,
+      "n_cols": 5,
+      "n_header_rows": 2,
+      "tolerance_rows": 1,
+      "unit": "INR lakh",
+      "unit_source_expected_one_of": [
+        "above_region",
+        "earlier_page",
+        "same_page_above"
+      ],
+      "title_contains": "Revenue by segment",
+      "header_paths_expected": {
+        "1": [
+          "FY 2024-25",
+          "Q3"
+        ],
+        "2": [
+          "FY 2024-25",
+          "Q4"
+        ],
+        "3": [
+          "FY 2023-24",
+          "Q3"
+        ],
+        "4": [
+          "FY 2023-24",
+          "Q4"
+        ]
+      },
+      "row_label_paths_expected": {
+        "Product A": [
+          "Revenue",
+          "Domestic",
+          "Product A"
+        ],
+        "Export": [
+          "Revenue",
+          "Export"
+        ]
+      },
+      "indent_levels_expected": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        1,
+        0
+      ],
+      "cells": [
+        [
+          "Particulars",
+          "FY 2024-25",
+          "FY 2024-25",
+          "FY 2023-24",
+          "FY 2023-24"
+        ],
+        [
+          "Particulars",
+          "Q3",
+          "Q4",
+          "Q3",
+          "Q4"
+        ],
+        [
+          "Revenue",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Domestic",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Product A",
+          "2,940",
+          "3,110",
+          "2,655",
+          "2,801"
+        ],
+        [
+          "Product B",
+          "1,802",
+          "1,944",
+          "1,610",
+          "1,702"
+        ],
+        [
+          "Export",
+          "1,138",
+          "1,166",
+          "1,045",
+          "1,099"
+        ],
+        [
+          "Other income",
+          "(412)",
+          "508",
+          "(388)",
+          "476"
+        ],
+        [
+          "Total revenue",
+          "5,468",
+          "6,728",
+          "4,922",
+          "6,078"
+        ]
+      ],
+      "normalized": [
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          2940.0,
+          3110.0,
+          2655.0,
+          2801.0
+        ],
+        [
+          null,
+          1802.0,
+          1944.0,
+          1610.0,
+          1702.0
+        ],
+        [
+          null,
+          1138.0,
+          1166.0,
+          1045.0,
+          1099.0
+        ],
+        [
+          null,
+          -412.0,
+          508.0,
+          -388.0,
+          476.0
+        ],
+        [
+          null,
+          5468.0,
+          6728.0,
+          4922.0,
+          6078.0
+        ]
+      ],
+      "reconciliation_expected": [
+        {
+          "kind": "down_foot",
+          "note": "Total revenue is NOT the sum of the level-1 rows in this fixture; see f6 for the deliberate-typo case"
+        }
+      ]
+    }
+  ],
+  "negatives": []
+}

@@ -1,0 +1,44 @@
+{
+  "document": "f7_rotated_landscape.pdf",
+  "generated_by": "metrics/fixtures/make_fixtures.py",
+  "why": "A landscape exhibit inside a portrait document: a landscape mediabox with no /Rotate. Coordinates must be read in display space. The Total column is a self-declared total, so cross-foot must run and pass on all three data rows.",
+  "expect_logical_tables": 1,
+  "expect_n_cols": 6,
+  "expect_data_rows": 3,
+  "expect_page_rotation": 0,
+  "header": [
+    "Instrument",
+    "FY26",
+    "FY27",
+    "FY28",
+    "FY29",
+    "Total"
+  ],
+  "data_rows": [
+    [
+      "Term loan A",
+      "1,200",
+      "1,200",
+      "900",
+      "600",
+      "3,900"
+    ],
+    [
+      "Term loan B",
+      "450",
+      "450",
+      "450",
+      "450",
+      "1,800"
+    ],
+    [
+      "Debentures",
+      "0",
+      "1,000",
+      "0",
+      "1,000",
+      "2,000"
+    ]
+  ],
+  "cross_foot_expected_pass": 3
+}
