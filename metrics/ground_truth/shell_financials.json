@@ -1,0 +1,298 @@
+{
+  "document": "Shell.pdf",
+  "sha256_prefix": "73c03c4b7b5e",
+  "labelling_method": "Hand-labelled from the rendered page text. This document is an Excel sheet printed to PDF: its reading order is scrambled (the header row is the last thing in the content stream), its rules are drawn as ~18,000 touching 0.72 pt squares, and it contains six live #REF! error values. The correct column count is judged from the x positions of the value tokens, which show two value columns per year (line items and subtotals sit at different x). Cells are given for a row range rather than the whole table where noted.",
+  "pages_exhaustively_labelled": [
+    1,
+    2
+  ],
+  "detection": [
+    {
+      "page": 1,
+      "kind": "table",
+      "id": "shell_p1_bs",
+      "bbox": [
+        53.6,
+        37.5,
+        557.4,
+        750.8
+      ]
+    },
+    {
+      "page": 2,
+      "kind": "table",
+      "id": "shell_p2_pl",
+      "bbox": [
+        46.4,
+        51.7,
+        564.5,
+        571.3
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": "shell_p2_pl",
+      "page": 2,
+      "bbox": [
+        46.4,
+        51.7,
+        564.5,
+        571.3
+      ],
+      "n_rows": 23,
+      "n_cols": 6,
+      "n_header_rows": 1,
+      "tolerance_cols": 1,
+      "row_range": [
+        0,
+        12
+      ],
+      "unit": "INR million",
+      "note": "Six columns: Particulars (the roman numeral is part of the label -- a seventh column for it is visually present but one row, 'Earnings per share (Basic and Diluted)', starts at the roman-numeral x and blocks any straight boundary), Note, then two value columns per year because subtotals sit at a different x from line items. The unit prints as '(` Million)': the grave accent is a rupee sign from a legacy font encoding, and reading it as INR must be a flagged inference.",
+      "reconciliation_expected": [
+        {
+          "kind": "down_foot",
+          "row": 11,
+          "col": 3,
+          "status": "pass",
+          "note": "Total Expenses = the six expense line items above it"
+        }
+      ],
+      "cells": [
+        [
+          "Particulars",
+          "Note",
+          "2022-23 ( Million)",
+          "",
+          "2021-22 ( Million)",
+          ""
+        ],
+        [
+          "I Revenue from Operations",
+          "25",
+          "16,195.63",
+          "",
+          "6,680.45",
+          ""
+        ],
+        [
+          "II Other Income",
+          "26",
+          "138.32",
+          "",
+          "51.45",
+          ""
+        ],
+        [
+          "III Total Income (I+II)",
+          "",
+          "",
+          "16,333.95",
+          "",
+          "6,731.90"
+        ],
+        [
+          "IV Expenses",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Purchase of Stock in Trade",
+          "27",
+          "14,732.21",
+          "",
+          "6,317.91",
+          ""
+        ],
+        [
+          "Changes in Inventory of Stock-in-trade",
+          "28",
+          "130.11",
+          "",
+          "(146.69)",
+          ""
+        ],
+        [
+          "Employee Benefits Expense",
+          "29",
+          "57.41",
+          "",
+          "58.25",
+          ""
+        ],
+        [
+          "Finance Costs",
+          "30",
+          "0.41",
+          "",
+          "2.62",
+          ""
+        ],
+        [
+          "Depreciation and Amortisation Expenses",
+          "31",
+          "11.14",
+          "",
+          "14.86",
+          ""
+        ],
+        [
+          "Other Expenses",
+          "32",
+          "393.41",
+          "",
+          "244.83",
+          ""
+        ],
+        [
+          "Total Expenses",
+          "",
+          "",
+          "15,324.69",
+          "",
+          "6,491.78"
+        ]
+      ],
+      "normalized": [
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          16195.63,
+          null,
+          6680.45,
+          null
+        ],
+        [
+          null,
+          null,
+          138.32,
+          null,
+          51.45,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          16333.95,
+          null,
+          6731.9
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          14732.21,
+          null,
+          6317.91,
+          null
+        ],
+        [
+          null,
+          null,
+          130.11,
+          null,
+          -146.69,
+          null
+        ],
+        [
+          null,
+          null,
+          57.41,
+          null,
+          58.25,
+          null
+        ],
+        [
+          null,
+          null,
+          0.41,
+          null,
+          2.62,
+          null
+        ],
+        [
+          null,
+          null,
+          11.14,
+          null,
+          14.86,
+          null
+        ],
+        [
+          null,
+          null,
+          393.41,
+          null,
+          244.83,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          15324.69,
+          null,
+          6491.78
+        ]
+      ],
+      "labelling_correction": "Corrected after metrics/eval.py flagged a disagreement: the first version of this label carried page 1's header ('As at March 31, 2023') onto page 2, which is the profit-and-loss statement and is headed '2022-23' / '2021-22'. The three header lines (y=68.7 '2022-23 2021-22', y=74.9 'Particulars Note', y=86.9 '( Million)') sit inside one row band at single line spacing, so this is ONE header row with wrapped cells, not two or three. Verified against the page token positions.",
+      "labelling_correction_2": "Corrected after metrics/eval.py flagged eight disagreements in column 1. The first version of this label gave the Note column numeric normalized values (25.0, 26.0, ...). That is wrong: '25' in a column headed 'Note' is a pointer to note 25, not a quantity, and typing it as a number invites a downstream consumer to sum it. The pipeline types the column 'reference' and leaves normalized_value null, which is the intended behaviour; the label was at fault."
+    }
+  ],
+  "structure_only": [
+    {
+      "id": "shell_p1_bs",
+      "page": 1,
+      "n_rows": 47,
+      "n_cols": 6,
+      "n_header_rows": 2,
+      "tolerance_rows": 4,
+      "tolerance_cols": 2,
+      "note": "Balance sheet. Enumerators ('(a)', '(i)') occupy their own narrow column, the Note column is narrow with long labels beside it, and totals sit in a separate value column. Known-hard: the extractor merges the enumerator and Note columns into the label column. See LIMITATIONS.md L3.",
+      "reconciliation_expected_min_pass": 1
+    }
+  ],
+  "value_expectations": [
+    {
+      "page": 3,
+      "raw_text": "#REF!",
+      "value_type": "error",
+      "normalized_value": null,
+      "must_be_flagged": true,
+      "expected_codes": [
+        "SPREADSHEET_ERROR"
+      ],
+      "note": "Six of these exist in the cash-flow statement. They must never be coerced to 0 or to null-and-forgotten; a number the source document could not itself compute must not look like a number downstream.",
+      "min_occurrences": 4
+    },
+    {
+      "page": 2,
+      "raw_text": "(146.69)",
+      "value_type": "number",
+      "normalized_value": -146.69,
+      "must_be_flagged": false,
+      "note": "Parenthesised negative."
+    }
+  ],
+  "negatives": []
+}

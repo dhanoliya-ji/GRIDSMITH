@@ -1,0 +1,103 @@
+{
+  "document": "Apple Form 10-K.pdf",
+  "sha256_prefix": "ec74758cd767",
+  "labelling_method": "Hand-labelled from the rendered page text, cross-checked against the page image. Table extents read off the document's own cell background-fill rectangles and horizontal rules. Currency symbols sit in their own narrow column in this filing; per metrics/README.md the expected cell text is the folded form '$ 167,045' with the single space the PDF's token positions imply.",
+  "pages_exhaustively_labelled": [3, 25, 26, 32],
+  "detection": [
+    {"page": 3, "kind": "negative", "negative_kind": "table_of_contents",
+     "bbox": [19.0, 140.0, 585.0, 441.0],
+     "note": "Item rows with ascending trailing page numbers. Alternating row shading makes the fill detector propose a clean seven-column lattice, so this must be refused by a trap rule, not missed by the detector."},
+    {"page": 25, "kind": "table", "id": "apple_p25", "bbox": [18.2, 106.0, 594.0, 184.3]},
+    {"page": 26, "kind": "table", "id": "apple_p26", "bbox": [18.2, 106.0, 594.0, 184.3]},
+    {"page": 32, "kind": "table", "id": "apple_p32", "bbox": [18.2, 106.0, 594.0, 470.0]}
+  ],
+  "tables": [
+    {
+      "id": "apple_p25",
+      "page": 25,
+      "bbox": [18.2, 106.0, 594.0, 184.3],
+      "n_rows": 7,
+      "n_cols": 6,
+      "n_header_rows": 1,
+      "unit": "USD million",
+      "title_contains": "Segment Operating Performance",
+      "column_units_expected": {"1": "USD", "3": "USD", "5": "USD"},
+      "column_types_expected": {"1": "currency", "2": "percent", "3": "currency",
+                                "4": "percent", "5": "currency"},
+      "reconciliation_expected": [
+        {"kind": "down_foot", "row": 6, "col": 1, "status": "pass"},
+        {"kind": "down_foot", "row": 6, "col": 3, "status": "pass"},
+        {"kind": "down_foot", "row": 6, "col": 5, "status": "pass"}
+      ],
+      "cells": [
+        ["", "2024", "Change", "2023", "Change", "2022"],
+        ["Americas", "$ 167,045", "3 %", "$ 162,560", "(4)%", "$ 169,658"],
+        ["Europe", "101,328", "7 %", "94,294", "(1)%", "95,118"],
+        ["Greater China", "66,952", "(8)%", "72,559", "(2)%", "74,200"],
+        ["Japan", "25,052", "3 %", "24,257", "(7)%", "25,977"],
+        ["Rest of Asia Pacific", "30,658", "4 %", "29,615", "1 %", "29,375"],
+        ["Total net sales", "$ 391,035", "2 %", "$ 383,285", "(3)%", "$ 394,328"]
+      ],
+      "normalized": [
+        [null, null, null, null, null, null],
+        [null, 167045.0, 3.0, 162560.0, -4.0, 169658.0],
+        [null, 101328.0, 7.0, 94294.0, -1.0, 95118.0],
+        [null, 66952.0, -8.0, 72559.0, -2.0, 74200.0],
+        [null, 25052.0, 3.0, 24257.0, -7.0, 25977.0],
+        [null, 30658.0, 4.0, 29615.0, 1.0, 29375.0],
+        [null, 391035.0, 2.0, 383285.0, -3.0, 394328.0]
+      ]
+    },
+    {
+      "id": "apple_p26",
+      "page": 26,
+      "bbox": [18.2, 106.0, 594.0, 184.3],
+      "n_rows": 7,
+      "n_cols": 6,
+      "n_header_rows": 1,
+      "unit": "USD million",
+      "title_contains": "Products and Services Performance",
+      "note": "Row 1 column 2 is an em-dash percent, meaning 'no change'. It must NOT normalise to 0.0: an em-dash is a dash, not a zero (section S7 of the brief). Row 5 label carries a footnote reference '(1)'.",
+      "reconciliation_expected": [
+        {"kind": "down_foot", "row": 6, "col": 1, "status": "pass"},
+        {"kind": "down_foot", "row": 6, "col": 3, "status": "pass"},
+        {"kind": "down_foot", "row": 6, "col": 5, "status": "pass"}
+      ],
+      "cells": [
+        ["", "2024", "Change", "2023", "Change", "2022"],
+        ["iPhone", "$ 201,183", "— %", "$ 200,583", "(2)%", "$ 205,489"],
+        ["Mac", "29,984", "2 %", "29,357", "(27)%", "40,177"],
+        ["iPad", "26,694", "(6)%", "28,300", "(3)%", "29,292"],
+        ["Wearables, Home and Accessories", "37,005", "(7)%", "39,845", "(3)%", "41,241"],
+        ["Services (1)", "96,169", "13 %", "85,200", "9 %", "78,129"],
+        ["Total net sales", "$ 391,035", "2 %", "$ 383,285", "(3)%", "$ 394,328"]
+      ],
+      "normalized": [
+        [null, null, null, null, null, null],
+        [null, 201183.0, null, 200583.0, -2.0, 205489.0],
+        [null, 29984.0, 2.0, 29357.0, -27.0, 40177.0],
+        [null, 26694.0, -6.0, 28300.0, -3.0, 29292.0],
+        [null, 37005.0, -7.0, 39845.0, -3.0, 41241.0],
+        [null, 96169.0, 13.0, 85200.0, 9.0, 78129.0],
+        [null, 391035.0, 2.0, 383285.0, -3.0, 394328.0]
+      ]
+    }
+  ],
+  "structure_only": [
+    {
+      "id": "apple_p32", "page": 32, "n_rows": 26, "n_cols": 4, "n_header_rows": 2,
+      "tolerance_rows": 3,
+      "note": "Consolidated statements of operations. Two header levels ('Years ended' spanning the three period columns, then the three dates), a three-level indented row hierarchy ('Net sales:' > 'Products'/'Services'), and several subtotal rows that must reconcile: Products+Services=Total net sales, and Total operating expenses=R&D+SG&A.",
+      "indent_hierarchy_expected": [
+        {"label_contains": "Products", "parent_contains": "Net sales"},
+        {"label_contains": "Research and development", "parent_contains": "Operating expenses"}
+      ],
+      "reconciliation_expected_min_pass": 2
+    }
+  ],
+  "negatives": [
+    {"page": 3, "negative_kind": "table_of_contents",
+     "expected_codes": ["TOC_TRAILING_PAGE_NUMBERS", "TOC_HEADING_NEARBY",
+                        "TOC_DOT_LEADERS"]}
+  ]
+}

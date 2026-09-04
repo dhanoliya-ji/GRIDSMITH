@@ -1,0 +1,120 @@
+{
+  "document": "Shell MRPL Aviation Fuels and Services Limited.pdf",
+  "sha256_prefix": "37ab4d2c593d",
+  "labelling_method": "Hand-labelled from the rendered page text (pymupdf get_text per page, cross-checked against the page image). Table extents were read off the document's own horizontal rule coordinates, which are the author's cell boundaries, not the extractor's output. Cell strings follow the conventions in metrics/README.md.",
+  "pages_exhaustively_labelled": [1, 3, 4],
+  "detection": [
+    {"page": 1, "kind": "table", "id": "mrpl_t1", "bbox": [42.5, 180.1, 552.2, 277.1]},
+    {"page": 3, "kind": "table", "id": "mrpl_t2", "bbox": [42.5, 318.8, 552.2, 421.9]},
+    {"page": 3, "kind": "table", "id": "mrpl_t3", "bbox": [42.5, 604.6, 552.2, 717.3]},
+    {"page": 4, "kind": "table", "id": "mrpl_t4", "bbox": [42.5, 173.5, 547.1, 421.9]},
+    {"page": 4, "kind": "table", "id": "mrpl_t5", "bbox": [42.5, 460.3, 552.2, 511.5]}
+  ],
+  "tables": [
+    {
+      "id": "mrpl_t1",
+      "page": 1,
+      "bbox": [42.5, 180.1, 552.2, 277.1],
+      "n_rows": 4,
+      "n_cols": 4,
+      "n_header_rows": 1,
+      "unit": "INR crore",
+      "unit_source_expected": "table_header",
+      "section_path_contains": "Ratings reaffirmed",
+      "title_contains": "Summary of rating action",
+      "footnotes": [
+        {"marker": "*", "text_contains": "Instrument details are provided in Annexure-I",
+         "linked_cell": [0, 0]}
+      ],
+      "reconciliation_expected": [
+        {"kind": "down_foot", "row": 3, "col": 1, "status": "pass"},
+        {"kind": "down_foot", "row": 3, "col": 2, "status": "pass"}
+      ],
+      "cells": [
+        ["Instrument*", "Previous rated amount (Rs. crore)", "Current rated amount (Rs. crore)", "Rating action"],
+        ["Long term/Short term fund based/non-fund based", "143.00", "143.00", "[ICRA]AA-(Stable)/[ICRA]A1+; reaffirmed"],
+        ["Long term/Short term unallocated", "22.00", "22.00", "[ICRA]AA-(Stable)/[ICRA]A1+; reaffirmed"],
+        ["Total", "165.0", "165.0", ""]
+      ],
+      "normalized": [
+        [null, null, null, null],
+        [null, 143.0, 143.0, null],
+        [null, 22.0, 22.0, null],
+        [null, 165.0, 165.0, null]
+      ]
+    },
+    {
+      "id": "mrpl_t3",
+      "page": 3,
+      "bbox": [42.5, 604.6, 552.2, 717.3],
+      "n_rows": 8,
+      "n_cols": 3,
+      "n_header_rows": 1,
+      "unit": "INR crore",
+      "title_contains": "Key financial indicators",
+      "note": "Column 1/2 mix currency amounts with percentages and ratios, so the column type must infer as text and no reconciliation may be attempted. 'Total outside liabilities/Tangible net worth (times)' begins with 'Total' but is a ratio.",
+      "reconciliation_expected": [],
+      "cells": [
+        ["", "FY2024", "FY2025"],
+        ["Operating income", "2,087.5", "2,550.0"],
+        ["PAT", "30.8", "53.6"],
+        ["OPBDIT/OI", "0.9%", "1.8%"],
+        ["PAT/OI", "1.5%", "2.1%"],
+        ["Total outside liabilities/Tangible net worth (times)", "6.4", "4.8"],
+        ["Total debt/OPBDIT (times)", "0.0", "0.0"],
+        ["Interest coverage (times)", "4929.5", "1694.0"]
+      ],
+      "normalized": [
+        [null, null, null],
+        [null, 2087.5, 2550.0],
+        [null, 30.8, 53.6],
+        [null, 0.9, 1.8],
+        [null, 1.5, 2.1],
+        [null, 6.4, 4.8],
+        [null, 0.0, 0.0],
+        [null, 4929.5, 1694.0]
+      ]
+    },
+    {
+      "id": "mrpl_t5",
+      "page": 4,
+      "bbox": [42.5, 460.3, 552.2, 511.5],
+      "n_rows": 3,
+      "n_cols": 2,
+      "n_header_rows": 1,
+      "title_contains": "Complexity level",
+      "note": "The explanatory paragraph below the table shares the rule stack and must not become rows.",
+      "cells": [
+        ["Instrument", "Complexity indicator"],
+        ["Long term/Short term fund based/non-fund based", "Simple"],
+        ["Long term/Short term unallocated limits", "NA"]
+      ],
+      "normalized": [
+        [null, null],
+        [null, null],
+        [null, null]
+      ]
+    }
+  ],
+  "structure_only": [
+    {
+      "id": "mrpl_t2", "page": 3, "n_rows": 4, "n_cols": 2, "n_header_rows": 1,
+      "note": "Analytical approach: a genuine two-column table whose right column is prose. The TWO_COLUMN_PROSE trap rule must NOT fire, because the region is ruled.",
+      "must_not_be_rejected": true
+    },
+    {
+      "id": "mrpl_t4", "page": 4, "n_rows": 7, "n_cols": 11, "n_header_rows": 3,
+      "note": "Rating history: three header levels with spanning cells. Level 1 spans 'Current rating (FY2026)' and 'Chronology of rating history for the past 3 years'; level 2 gives each FY a Date/Rating pair.",
+      "header_spans_expected": [
+        {"row": 1, "text_contains": "FY2025", "col_span": 2},
+        {"row": 1, "text_contains": "FY2024", "col_span": 2},
+        {"row": 1, "text_contains": "FY2023", "col_span": 2}
+      ],
+      "header_path_expected": {
+        "col": 5,
+        "path": ["Chronology of rating history for the past 3 years", "FY2025", "Date"]
+      }
+    }
+  ],
+  "negatives": []
+}
