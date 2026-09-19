@@ -12,8 +12,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python: ["3.10", "3.12"]
+        python: ["3.11", "3.13"]
     runs-on: ${{ matrix.os }}
+    # bash on both runners: with the Windows default (pwsh) a failing line in a
+    # multi-line `run` does not fail the step, which once let a broken install
+    # through and surfaced two steps later as "No module named pytest".
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 

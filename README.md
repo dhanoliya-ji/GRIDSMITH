@@ -7,7 +7,7 @@
 *Every cell is either correct, or flagged as uncertain.*
 
 [![ci](https://github.com/dhanoliya-ji/gridsmith/actions/workflows/ci.yml/badge.svg)](https://github.com/dhanoliya-ji/gridsmith/actions/workflows/ci.yml)
-![python](https://img.shields.io/badge/python-3.10%2B-blue)
+![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![llm](https://img.shields.io/badge/LLM-none-informational)
 ![offline](https://img.shields.io/badge/network-enforced%20offline-informational)
@@ -82,7 +82,7 @@ python -m gridsmith run   --input "path/to/doc.pdf" --out ./out --offline
 python -m gridsmith audit --out ./out
 ```
 
-Python 3.10+. `tesseract-ocr` is optional and only affects scanned pages — without it
+Python 3.11+. `tesseract-ocr` is optional and only affects scanned pages — without it
 they are flagged rather than guessed (see [LIMITATIONS L1](docs/LIMITATIONS.md)).
 
 Nothing is downloaded at run time and nothing is fitted at run time: the confidence curve

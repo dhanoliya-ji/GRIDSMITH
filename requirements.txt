@@ -5,6 +5,8 @@
 # See docs/DECISIONS.md D1 for why the pipeline is pure-classical.
 pymupdf==1.28.2          # PDF parsing, vector geometry, rasterising, overlay rendering
 numpy==2.3.2             # projection profiles, Otsu, skew search
+                         #   binds the floor: this release needs Python >= 3.11,
+                         #   which is why pyproject requires-python says 3.11
 pillow==11.3.0           # deskew resampling, denoise, cell crops for OCR
 openpyxl==3.1.5          # one .xlsx per logical table
 psutil==7.0.0            # measured peak RSS for the resource report
