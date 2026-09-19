@@ -49,9 +49,11 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 from gridsmith.determinism import canonical_json, write_text  # noqa: E402
 
 GT_DIR = os.path.join(os.path.dirname(HERE), "ground_truth")
+# See metrics/run_all.py: the sample PDFs are not redistributable and live outside
+# the repo.  Override with GRIDSMITH_SAMPLES.
 SAMPLE_DIR = os.environ.get(
     "GRIDSMITH_SAMPLES",
-    "c:/Users/gajen/OneDrive/Desktop/sample data/sample data")
+    os.path.join(os.path.dirname(os.path.dirname(HERE)), "sample_data"))
 
 
 def iou(a, b):

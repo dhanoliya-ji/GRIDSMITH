@@ -4,7 +4,10 @@ from gridsmith import s1_intake as s1
 from gridsmith.geometry import median
 from gridsmith.textlayer import extract_page_text
 
-SD = "c:/Users/gajen/OneDrive/Desktop/sample data/sample data/"
+import os
+# One-off measurement script kept for provenance: these are the row-pitch numbers
+# quoted in docs/DECISIONS.md D4.  Needs the sample PDFs; see metrics/run_all.py.
+SD = os.environ.get("GRIDSMITH_SAMPLES", "sample_data") + os.sep
 cases = [("Apple Form 10-K.pdf", 25, 118.0, 172.0, "Apple: 5 SEPARATE rows"),
          ("Shell MRPL Aviation Fuels and Services Limited.pdf", 4, 250.0, 294.0,
           "ICRA: 1 row WRAPPED over 5 lines"),

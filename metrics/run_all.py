@@ -41,9 +41,11 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 
 from gridsmith.determinism import canonical_json, write_text  # noqa: E402
 
-SAMPLE_DIR = os.environ.get(
-    "GRIDSMITH_SAMPLES",
-    "c:/Users/gajen/OneDrive/Desktop/sample data/sample data")
+# The three assignment PDFs are not redistributable, so they are not in the repo.
+# Point GRIDSMITH_SAMPLES at a directory holding them; absent that, the sample
+# runs are skipped with a notice and the fixture suite still runs in full.
+SAMPLE_DIR = os.environ.get("GRIDSMITH_SAMPLES",
+                            os.path.join(ROOT, "sample_data"))
 
 SAMPLES = [
     ("mrpl", "Shell MRPL Aviation Fuels and Services Limited.pdf"),
