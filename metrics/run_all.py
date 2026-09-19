@@ -107,12 +107,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-ablations", action="store_true")
     ap.add_argument("--skip-fixtures", action="store_true")
+    ap.add_argument("--only-fixtures", action="store_true",
+                    help="skip the sample documents and ablations entirely; "
+                         "used by CI, which has no access to the sample PDFs")
     args = ap.parse_args()
 
     summary = {"configs": {}, "resources": {}, "fixtures": None}
     calib_points = []
 
-    for cfg_name, extra in CONFIGS:
+    for cfg_name, extra in (() if args.only_fixtures else CONFIGS):
         if args.no_ablations and cfg_name != "default":
             continue
         print("=" * 78)
@@ -164,10 +167,19 @@ def main():
                                                    "%d/%d" % (f["pass"], f["total"])
                                                    for f in fx["fixtures"]}}
 
-    write_text(os.path.join(HERE, "results", "all_configs.json"),
-               canonical_json(summary) + "\n")
-    write_text(os.path.join(HERE, "results", "calibration_points.json"),
-               canonical_json(calib_points) + "\n")
+    # --only-fixtures computes neither the ablation grid nor the calibration
+    # points, so writing them here would replace the committed results with
+    # empty ones.  Only write what this invocation actually measured.
+    if not args.only_fixtures:
+        write_text(os.path.join(HERE, "results", "all_configs.json"),
+                   canonical_json(summary) + "\n")
+        write_text(os.path.join(HERE, "results", "calibration_points.json"),
+                   canonical_json(calib_points) + "\n")
+
+    if args.only_fixtures:
+        # Nothing below this point has anything to report: no configuration was
+        # run, so the ablation table would be empty and the "wrote ..." line false.
+        return 0
 
     print()
     print("=" * 78)

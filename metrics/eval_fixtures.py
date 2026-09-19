@@ -311,6 +311,11 @@ def _iou(a, b):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default=None)
+    # Opt-in regression gate.  The default stays 0-exit so ad-hoc runs and the
+    # --only workflow are unaffected; CI passes the current known-good count so
+    # a behavioural regression fails the build instead of scrolling past.
+    ap.add_argument("--min-pass", type=int, default=None,
+                    help="exit non-zero if fewer than N checks pass")
     args = ap.parse_args()
     paths = sorted(glob.glob(os.path.join(FIX, "*_gt.json")))
     if args.only:
@@ -334,6 +339,10 @@ def main():
     write_text(os.path.join(HERE, "results", "fixtures.json"),
                canonical_json({"total_pass": tot_p, "total_checks": tot_n,
                                "fixtures": results}) + "\n")
+    if args.min_pass is not None and tot_p < args.min_pass:
+        print("REGRESSION: %d passing, expected at least %d"
+              % (tot_p, args.min_pass))
+        return 1
     return 0
 
 
