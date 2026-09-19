@@ -684,11 +684,14 @@ def run(input_path: str, out_dir: str, cfg: Config) -> dict:
     write_text(os.path.join(out_dir, "metrics.json"), canonical_json(summary) + "\n")
     log.event("done", **summary["counts"])
     log.write(os.path.join(out_dir, "logs", "run.jsonl"))
-    if not cfg.fixed_time:
-        write_text(os.path.join(out_dir, "logs", "timing.json"),
-                   canonical_json({"wall_seconds": round(wall, 3),
-                                   "peak_rss_mb": peak_rss_mb(),
-                                   "note": "excluded from the determinism claim"}) + "\n")
+    # Always written, including under --fixed-time: metrics.json zeroes the two
+    # time-varying values so its bytes stay reproducible, and this file is the
+    # one place the real figures survive.  ``verify`` lists it in VOLATILE_FILES
+    # and ignores it, so writing it unconditionally cannot weaken the claim.
+    write_text(os.path.join(out_dir, "logs", "timing.json"),
+               canonical_json({"wall_seconds": round(wall, 3),
+                               "peak_rss_mb": peak_rss_mb(),
+                               "note": "excluded from the determinism claim"}) + "\n")
     doc.close()
     return summary
 
