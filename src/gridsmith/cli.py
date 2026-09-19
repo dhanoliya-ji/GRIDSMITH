@@ -185,6 +185,12 @@ def _print_summary(s: dict, out_dir: str) -> None:
              q["n_mandatory"],
              "  [mandatory exceeds budget]" if q["budget_exceeded_by_mandatory"]
              else ""))
-    print("  resources     : %.1fs wall (%.2fs/page), peak RSS %.0f MB"
-          % (r["wall_seconds"], r["seconds_per_page"], r["peak_rss_mb"]))
+    if r.get("fixed_time"):
+        # metrics.json zeroes these under --fixed-time so its bytes stay
+        # reproducible; printing the zeros would read as "instant, no memory".
+        print("  resources     : not measured (--fixed-time);"
+              " real figures in logs/timing.json")
+    else:
+        print("  resources     : %.1fs wall (%.2fs/page), peak RSS %.0f MB"
+              % (r["wall_seconds"], r["seconds_per_page"], r["peak_rss_mb"]))
     print("  written to    : %s" % os.path.abspath(out_dir))
