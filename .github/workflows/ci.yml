@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Unit and end-to-end tests
+        run: python -m pytest -q
+
+      # The determinism claim is the one property most likely to rot silently, so it
+      # is asserted in CI rather than left to the test suite alone: two full runs of
+      # the same fixture must produce byte-identical output.
+      - name: Determinism (two-run byte diff)
+        run: |
+          python -m gridsmith run --input metrics/fixtures/f2_continuation_6pages.pdf --out ./_a --offline --fixed-time
+          python -m gridsmith run --input metrics/fixtures/f2_continuation_6pages.pdf --out ./_b --offline --fixed-time
+          python -m gridsmith verify --a ./_a --b ./_b
+
+      # The sample PDFs are not redistributable, so CI exercises the eight generated
+      # adversarial fixtures instead -- their ground truth is exact by construction.
+      # --min-pass turns a behavioural regression into a failed build rather than a
+      # line that scrolls past in the log.
+      - name: Adversarial fixture checks
+        run: |
+          python metrics/run_all.py --only-fixtures
+          python metrics/eval_fixtures.py --min-pass 56
