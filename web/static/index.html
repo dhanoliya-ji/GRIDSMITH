@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gridsmith</title>
+    <meta
+      name="description"
+      content="Deterministic table extraction from messy PDFs. Every cell is either correct or flagged as uncertain."
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>&#129513;</text></svg>" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>gridsmith</h1>
+        <span class="tag">deterministic PDF table extraction</span>
+      </div>
+      <a class="src" href="https://github.com/dhanoliya-ji/gridsmith" target="_blank" rel="noreferrer">source</a>
+    </header>
+
+    <p class="claim">
+      Every cell is either correct, or flagged as uncertain. The metric that follows is not
+      accuracy but the <strong>silent error</strong> — a cell that is wrong, shipped confidently,
+      and unflagged. No language model touches the document.
+    </p>
+
+    <main>
+      <aside>
+        <section class="panel">
+          <h2>Pick a document</h2>
+          <p class="hint">
+            These are the adversarial fixtures from the test suite. Each one breaks table
+            extraction in a different way.
+          </p>
+          <div id="samples" class="samples"><p class="muted">loading…</p></div>
+        </section>
+
+        <section class="panel">
+          <h2>Or upload your own</h2>
+          <input type="file" id="file" accept="application/pdf" />
+          <p class="hint" id="limits"></p>
+        </section>
+      </aside>
+
+      <section class="results">
+        <div id="status" class="status">Choose a document to extract.</div>
+        <div id="stats" class="stats" hidden></div>
+        <div id="rejected" class="rejected" hidden></div>
+        <div id="tables"></div>
+      </section>
+    </main>
+
+    <div id="tip" class="tip" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

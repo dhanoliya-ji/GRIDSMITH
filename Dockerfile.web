@@ -1,0 +1,40 @@
+# The browser front end for gridsmith.
+#
+# Same image contents as the CLI build plus a thin FastAPI layer. The pipeline
+# runs per request with the CLI's defaults; only the page cap differs, and the
+# page says so.
+FROM python:3.11-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=20240928 \
+    PYTHONIOENCODING=utf-8 \
+    OMP_NUM_THREADS=2 \
+    OPENBLAS_NUM_THREADS=2 \
+    MKL_NUM_THREADS=2 \
+    PYTHONPATH=/app/src \
+    PORT=8000
+
+WORKDIR /app
+
+# tesseract is optional: without it the pipeline flags raster cells
+# OCR_UNAVAILABLE rather than guessing, which is the documented behaviour.
+COPY requirements.txt ./reqs/requirements.txt
+COPY web/requirements.txt ./reqs/web-requirements.txt
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tesseract-ocr \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir -r reqs/requirements.txt -r reqs/web-requirements.txt
+
+COPY pyproject.toml README.md ./
+COPY src/ ./src/
+COPY metrics/ ./metrics/
+COPY web/ ./web/
+
+# The fixtures are generated into the image so the demo has documents to offer
+# without shipping binaries in git.
+RUN python metrics/fixtures/make_fixtures.py >/dev/null \
+    && python -c "import gridsmith, pymupdf, fastapi; print('gridsmith', gridsmith.__version__, 'ok')"
+
+EXPOSE 8000
+CMD ["sh", "-c", "uvicorn web.app:app --host 0.0.0.0 --port ${PORT:-8000}"]
