@@ -30,7 +30,7 @@ Comparison is deliberately generous to the baselines:
 *   the false-positive count is restricted to the exhaustively-labelled pages, exactly
     as for gridsmith.
 
-    python metrics/baselines/run_baselines.py
+    python metrics/run_baselines.py
 """
 from __future__ import annotations
 
@@ -43,17 +43,17 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
-sys.path.insert(0, os.path.join(ROOT, "src"))
+ROOT = os.path.dirname(HERE)
+sys.path.insert(0, ROOT)
 
-from gridsmith.determinism import canonical_json, write_text  # noqa: E402
+from gridsmith import canonical_json, write_text  # noqa: E402
 
-GT_DIR = os.path.join(os.path.dirname(HERE), "ground_truth")
+GT_DIR = os.path.join(HERE, "ground_truth")
 # See metrics/run_all.py: the sample PDFs are not redistributable and live outside
 # the repo.  Override with GRIDSMITH_SAMPLES.
 SAMPLE_DIR = os.environ.get(
     "GRIDSMITH_SAMPLES",
-    os.path.join(os.path.dirname(os.path.dirname(HERE)), "sample_data"))
+    os.path.join(ROOT, "sample_data"))
 
 
 def iou(a, b):
@@ -267,7 +267,7 @@ def main():
     print("Those are where this assignment's marks are, and where a one-line call to an")
     print("off-the-shelf extractor cannot compete regardless of its detection score.")
 
-    write_text(os.path.join(os.path.dirname(HERE), "results", "baselines.json"),
+    write_text(os.path.join(HERE, "results", "baselines.json"),
                canonical_json(report) + "\n")
     print()
     print("wrote metrics/results/baselines.json")

@@ -47,9 +47,9 @@ import re
 import sqlite3
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
-from gridsmith.determinism import canonical_json, write_text  # noqa: E402
+from gridsmith import canonical_json, write_text  # noqa: E402
 
 GT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ground_truth")
 HIGH_CONF_FLOOR = 0.85

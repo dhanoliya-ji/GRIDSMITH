@@ -6,8 +6,6 @@ __pycache__/
 venv/
 
 # Pipeline output directories (regenerate with metrics/run_all.py).
-# Representative debug renders are committed under docs/renders/ instead, because
-# ARCHITECTURE.md illustrates the design with them.
 out/
 out_*/
 outfx_*/
@@ -30,3 +28,9 @@ Thumbs.db
 # Build
 build/
 dist/
+
+# Inputs and regenerated outputs
+sample_data/
+metrics/results/
+metrics/fixtures/*.pdf
+metrics/fixtures/*_gt.json

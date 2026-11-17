@@ -1,6 +1,0 @@
--r requirements.txt
-pytest==8.3.3
-# Baselines for the comparison the brief asks for in section 3.4.  pdfplumber is a
-# genuine off-the-shelf extractor; PyMuPDF's own find_tables() is a second one and
-# needs no extra install.
-pdfplumber==0.11.8

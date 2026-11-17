@@ -37,9 +37,9 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(ROOT, "src"))
+sys.path.insert(0, ROOT)
 
-from gridsmith.determinism import canonical_json, write_text  # noqa: E402
+from gridsmith import canonical_json, write_text  # noqa: E402
 
 # The three assignment PDFs are not redistributable, so they are not in the repo.
 # Point GRIDSMITH_SAMPLES at a directory holding them; absent that, the sample
@@ -71,7 +71,7 @@ def run(cmd, quiet=True):
 
 def env():
     e = dict(os.environ)
-    e["PYTHONPATH"] = os.path.join(ROOT, "src")
+    e["PYTHONPATH"] = ROOT
     e["PYTHONIOENCODING"] = "utf-8"
     return e
 

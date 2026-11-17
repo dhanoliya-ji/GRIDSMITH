@@ -33,7 +33,7 @@ import sys
 import pymupdf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "..", "..", "src"))
+sys.path.insert(0, os.path.join(HERE, "..", ".."))
 
 FONT = "helv"
 FONT_B = "hebo"
