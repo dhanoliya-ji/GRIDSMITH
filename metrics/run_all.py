@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
-from gridsmith import canonical_json, write_text  # noqa: E402
+from gridsmith.core import canonical_json, write_text  # noqa: E402
 
 # The three assignment PDFs are not redistributable, so they are not in the repo.
 # Point GRIDSMITH_SAMPLES at a directory holding them; absent that, the sample

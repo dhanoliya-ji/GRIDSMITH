@@ -8,7 +8,7 @@ Run after ``metrics/run_all.py``:
 Why offline.  §3.2 requires byte-identical reruns, so nothing may be fitted while
 extracting.  The logistic weights in ``gridsmith.config`` are fixed by hand and
 documented; the only *learned* object is the monotone map from that logistic score to a
-probability, and it is fitted here, once, and shipped as ``calibration.json``
+probability, and it is fitted here, once, and shipped as ``gridsmith/calibration.json``
 -- a lookup table the runtime reads and never modifies.
 
 Method: **isotonic regression by pool-adjacent-violators (PAV)**.
@@ -42,10 +42,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
-from gridsmith import canonical_json, write_text  # noqa: E402
+from gridsmith.core import canonical_json, write_text  # noqa: E402
 
 POINTS = os.path.join(HERE, "results", "calibration_points.json")
-OUT = os.path.join(ROOT, "calibration.json")
+OUT = os.path.join(ROOT, "gridsmith", "calibration.json")
 
 
 def pav(bins):

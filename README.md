@@ -51,19 +51,31 @@ scanned pages, contents and index traps) and the ablation table.
 ## How it works
 
 ```
-S1  intake         page typing, deskew, rotation
-S2  layout         running headers and footers, headings, captions, footnotes, scale notes
-S3  detection      ruled lines and fills | whitespace gutters | trap detector (TOC, index, prose)
-                   proposals are arbitrated, so refusing a lookalike is a real outcome
-S4  structure      column boundaries, row sources, spanning headers, indent hierarchy
-S5  cells          text layer, or per-cell OCR that fails closed
-S6  stitch         joins tables that continue across pages
-S7  normalise      types, scale, negatives, Indian and Western digit grouping
-S8  context        title, section, units, footnote links
-S9  confidence     14 signals -> isotonic calibration -> review queue
-S10 persist        SQLite, xlsx, manifest
-S11 audit          metrics and determinism check
+PDF -> reading -> detection -> structure -> values -> confidence -> output
+       S1, S2      S3           S4, S5, S6   S7, S8    S9            S10, S11
 ```
+
+| File | Stage | What it computes | Key functions |
+|---|---|---|---|
+| `gridsmith/reading.py` | S1, S2 | PDF text layer, page type, deskew and rotation, running headers, headings, captions | `extract_page_text`, `classify_page`, `deskew`, `segment_page` |
+| `gridsmith/detection.py` | S3 | Table candidates from ruled lines and fills, from whitespace gutters, and lookalike traps (contents, index, prose); arbitration between them | `detect_ruled`, `detect_borderless`, `classify`, `arbitrate` |
+| `gridsmith/structure.py` | S4, S5, S6 | Column and row boundaries, spanning headers, indent hierarchy, cell text or OCR, tables continued across pages | `build_grid`, `detect_header_rows`, `extract_text_cells`, `stitch` |
+| `gridsmith/values.py` | S7, S8 | Numbers, negatives, currency, dates and scale; table title, units and footnote links | `parse_number`, `normalize`, `resolve_scale`, `link_footnotes` |
+| `gridsmith/confidence.py` | S9 | 14 confidence signals per cell, isotonic calibration, subtotal checks, review queue | `score_table`, `Calibration`, `down_foot`, `build_queue` |
+| `gridsmith/output.py` | S10, S11 | SQLite database, one xlsx per table, manifest, audit and debug overlays | `open_db`, `write_table_xlsx`, `write_manifest`, `audit` |
+| `gridsmith/pipeline.py` | all | Runs every stage on one PDF; command line | `run`, `main` |
+| `gridsmith/core.py` | shared | Configuration, deterministic ids and JSON, box geometry, run log | `Config`, `canonical_json`, `iou`, `RunLog` |
+
+| Evaluation file | What it computes |
+|---|---|
+| `metrics/eval.py` | Detection precision, recall and F1 at IoU 0.7, TEDS-Struct, cell accuracy, silent errors |
+| `metrics/run_all.py` | Runs the default configuration and the 3 ablations, then evaluates each |
+| `metrics/fit_calibration.py` | Fits the isotonic calibration curve (pool adjacent violators) |
+| `metrics/calibration_report.py` | Reliability bins, expected calibration error, flagging precision and recall |
+| `metrics/run_baselines.py` | The same detection scoring for pdfplumber and PyMuPDF |
+| `metrics/eval_fixtures.py` | Pass or fail checks on the 8 adversarial PDFs |
+| `metrics/fixtures/make_fixtures.py` | Generates those 8 PDFs and their exact ground truth |
+| `metrics/ground_truth/` | 202 hand-labelled cells for the 3 sample PDFs |
 
 ## Reproduce
 
@@ -79,18 +91,4 @@ Extract tables from any PDF:
 
 ```bash
 python -m gridsmith run --input your.pdf --out out_your --offline
-```
-
-## Layout
-
-```
-gridsmith.py                 the whole pipeline in one file, one section per stage S1 to S11
-calibration.json             fitted isotonic calibration curve
-reproduce.py                 one command for all metrics
-metrics/eval.py              detection P/R/F1, TEDS-Struct, cell accuracy, silent errors
-metrics/run_all.py           default configuration and 3 ablations
-metrics/fit_calibration.py   isotonic calibration fit
-metrics/run_baselines.py     pdfplumber and PyMuPDF comparison
-metrics/fixtures/            adversarial PDF generator
-metrics/ground_truth/        hand-labelled cells for the 3 sample PDFs
 ```

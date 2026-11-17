@@ -46,7 +46,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
-from gridsmith import canonical_json, write_text  # noqa: E402
+from gridsmith.core import canonical_json, write_text  # noqa: E402
 
 GT_DIR = os.path.join(HERE, "ground_truth")
 # See metrics/run_all.py: the sample PDFs are not redistributable and live outside

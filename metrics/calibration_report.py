@@ -23,7 +23,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, ".."))
 
-from gridsmith import canonical_json, write_text  # noqa: E402
+from gridsmith.core import canonical_json, write_text  # noqa: E402
 
 POINTS = os.path.join(HERE, "results", "calibration_points.json")
 HIGH_CONF_FLOOR = 0.85
